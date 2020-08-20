@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MyPOSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="15" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ListTypes">
+          <Key>
+            <PropertyRef Name="ListTypeID" />
+          </Key>
+          <Property Name="ListTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ListTypesData">
+          <Key>
+            <PropertyRef Name="ListDataID" />
+          </Key>
+          <Property Name="ListDataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ListTypeID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Visible" Type="bit" />
+        </EntityType>
+        <EntityType Name="LoginUsers">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ProductSizes">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="SizeID" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="SizeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalesOrderDetails">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="int" />
+          <Property Name="StockID" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="SalesOrders">
+          <Key>
+            <PropertyRef Name="InvoiceNumber" />
+          </Key>
+          <Property Name="InvoiceNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Net" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Cash" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="StockID" />
+          </Key>
+          <Property Name="StockID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="SizeID" Type="int" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <Function Name="ups_Products_LoadAllProductsByProductName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ups_Products_LoadAllProductsForDataGridView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_ListTypesData_LoadDataIntoComboBox" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ListTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Login_verifyLoginDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Products_DeleteProductAndSizes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Products_InsertCustomerInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Products_InsertNewProductt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="CategoryID" Type="int" Mode="In" />
+          <Parameter Name="SupplierID" Type="int" Mode="In" />
+          <Parameter Name="PurchasePrice" Type="decimal" Mode="In" />
+          <Parameter Name="SalesPrice" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="usp_Products_InsertProductSizes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductID" Type="int" Mode="In" />
+          <Parameter Name="SizeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Sizes_LoadAllSizes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ListTypeID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="MyPOSModelStoreContainer">
+          <EntitySet Name="CustomerInfo" EntityType="Self.CustomerInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListTypes" EntityType="Self.ListTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListTypesData" EntityType="Self.ListTypesData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginUsers" EntityType="Self.LoginUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductSizes" EntityType="Self.ProductSizes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesOrderDetails" EntityType="Self.SalesOrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesOrders" EntityType="Self.SalesOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyPOSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListType">
+          <Key>
+            <PropertyRef Name="ListTypeID" />
+          </Key>
+          <Property Name="ListTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListTypesData">
+          <Key>
+            <PropertyRef Name="ListDataID" />
+          </Key>
+          <Property Name="ListDataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ListTypeID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Visible" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="LoginUser">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="PurchasePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalesPrice" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ProductSize">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="SizeID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="SizeID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalesOrderDetail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceNumber" Type="Int32" />
+          <Property Name="StockID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="SalesOrder">
+          <Key>
+            <PropertyRef Name="InvoiceNumber" />
+          </Key>
+          <Property Name="InvoiceNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Net" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cash" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="StockID" />
+          </Key>
+          <Property Name="StockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="SizeID" Type="Int32" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurchasePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalesPrice" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="MyPOSContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerInfoes" EntityType="Self.CustomerInfo" />
+          <EntitySet Name="ListTypes" EntityType="Self.ListType" />
+          <EntitySet Name="ListTypesDatas" EntityType="Self.ListTypesData" />
+          <EntitySet Name="LoginUsers" EntityType="Self.LoginUser" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductSizes" EntityType="Self.ProductSize" />
+          <EntitySet Name="SalesOrderDetails" EntityType="Self.SalesOrderDetail" />
+          <EntitySet Name="SalesOrders" EntityType="Self.SalesOrder" />
+          <EntitySet Name="Stocks" EntityType="Self.Stock" />
+          <FunctionImport Name="ups_Products_LoadAllProductsByProductName" ReturnType="Collection(MyPOSModel.ups_Products_LoadAllProductsByProductName_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ups_Products_LoadAllProductsForDataGridView" ReturnType="Collection(MyPOSModel.ups_Products_LoadAllProductsForDataGridView_Result)" />
+          <FunctionImport Name="usp_ListTypesData_LoadDataIntoComboBox" ReturnType="Collection(MyPOSModel.usp_ListTypesData_LoadDataIntoComboBox_Result)">
+            <Parameter Name="ListTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Login_verifyLoginDetails" ReturnType="Collection(String)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Products_DeleteProductAndSizes">
+            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Products_InsertCustomerInfo">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Mobile" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Products_InsertNewProductt" ReturnType="Collection(Decimal)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+            <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+            <Parameter Name="PurchasePrice" Mode="In" Type="Decimal" />
+            <Parameter Name="SalesPrice" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Products_InsertProductSizes">
+            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+            <Parameter Name="SizeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Sizes_LoadAllSizes" ReturnType="Collection(MyPOSModel.usp_Sizes_LoadAllSizes_Result)">
+            <Parameter Name="ListTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ups_Products_LoadAllProductsByProductName_Result">
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Supplier" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Purchase_Price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Sales_Price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Size" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="ups_Products_LoadAllProductsForDataGridView_Result">
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Supplier" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Purchase_Price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Sales_Price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Size" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_ListTypesData_LoadDataIntoComboBox_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_Sizes_LoadAllSizes_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="Select" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyPOSModelStoreContainer" CdmEntityContainer="MyPOSContext">
+          <EntitySetMapping Name="CustomerInfoes">
+            <EntityTypeMapping TypeName="MyPOSModel.CustomerInfo">
+              <MappingFragment StoreEntitySet="CustomerInfo">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListTypes">
+            <EntityTypeMapping TypeName="MyPOSModel.ListType">
+              <MappingFragment StoreEntitySet="ListTypes">
+                <ScalarProperty Name="ListTypeID" ColumnName="ListTypeID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListTypesDatas">
+            <EntityTypeMapping TypeName="MyPOSModel.ListTypesData">
+              <MappingFragment StoreEntitySet="ListTypesData">
+                <ScalarProperty Name="ListDataID" ColumnName="ListDataID" />
+                <ScalarProperty Name="ListTypeID" ColumnName="ListTypeID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginUsers">
+            <EntityTypeMapping TypeName="MyPOSModel.LoginUser">
+              <MappingFragment StoreEntitySet="LoginUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="MyPOSModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductSizes">
+            <EntityTypeMapping TypeName="MyPOSModel.ProductSize">
+              <MappingFragment StoreEntitySet="ProductSizes">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesOrderDetails">
+            <EntityTypeMapping TypeName="MyPOSModel.SalesOrderDetail">
+              <MappingFragment StoreEntitySet="SalesOrderDetails">
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="StockID" ColumnName="StockID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesOrders">
+            <EntityTypeMapping TypeName="MyPOSModel.SalesOrder">
+              <MappingFragment StoreEntitySet="SalesOrders">
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Net" ColumnName="Net" />
+                <ScalarProperty Name="Cash" ColumnName="Cash" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="MyPOSModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="StockID" ColumnName="StockID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ups_Products_LoadAllProductsByProductName" FunctionName="MyPOSModel.Store.ups_Products_LoadAllProductsByProductName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyPOSModel.ups_Products_LoadAllProductsByProductName_Result">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Purchase_Price" ColumnName="Purchase Price" />
+                <ScalarProperty Name="Sales_Price" ColumnName="Sales Price" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ups_Products_LoadAllProductsForDataGridView" FunctionName="MyPOSModel.Store.ups_Products_LoadAllProductsForDataGridView">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyPOSModel.ups_Products_LoadAllProductsForDataGridView_Result">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Purchase_Price" ColumnName="Purchase Price" />
+                <ScalarProperty Name="Sales_Price" ColumnName="Sales Price" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_ListTypesData_LoadDataIntoComboBox" FunctionName="MyPOSModel.Store.usp_ListTypesData_LoadDataIntoComboBox">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyPOSModel.usp_ListTypesData_LoadDataIntoComboBox_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Login_verifyLoginDetails" FunctionName="MyPOSModel.Store.usp_Login_verifyLoginDetails" />
+          <FunctionImportMapping FunctionImportName="usp_Products_DeleteProductAndSizes" FunctionName="MyPOSModel.Store.usp_Products_DeleteProductAndSizes" />
+          <FunctionImportMapping FunctionImportName="usp_Products_InsertCustomerInfo" FunctionName="MyPOSModel.Store.usp_Products_InsertCustomerInfo" />
+          <FunctionImportMapping FunctionImportName="usp_Products_InsertNewProductt" FunctionName="MyPOSModel.Store.usp_Products_InsertNewProductt" />
+          <FunctionImportMapping FunctionImportName="usp_Products_InsertProductSizes" FunctionName="MyPOSModel.Store.usp_Products_InsertProductSizes" />
+          <FunctionImportMapping FunctionImportName="usp_Sizes_LoadAllSizes" FunctionName="MyPOSModel.Store.usp_Sizes_LoadAllSizes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyPOSModel.usp_Sizes_LoadAllSizes_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Select" ColumnName="Select" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

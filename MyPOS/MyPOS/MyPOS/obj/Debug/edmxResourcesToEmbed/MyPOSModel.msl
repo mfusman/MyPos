@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyPOSModelStoreContainer" CdmEntityContainer="MyPOSContext">
+    <EntitySetMapping Name="CustomerInfoes">
+      <EntityTypeMapping TypeName="MyPOSModel.CustomerInfo">
+        <MappingFragment StoreEntitySet="CustomerInfo">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListTypes">
+      <EntityTypeMapping TypeName="MyPOSModel.ListType">
+        <MappingFragment StoreEntitySet="ListTypes">
+          <ScalarProperty Name="ListTypeID" ColumnName="ListTypeID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListTypesDatas">
+      <EntityTypeMapping TypeName="MyPOSModel.ListTypesData">
+        <MappingFragment StoreEntitySet="ListTypesData">
+          <ScalarProperty Name="ListDataID" ColumnName="ListDataID" />
+          <ScalarProperty Name="ListTypeID" ColumnName="ListTypeID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoginUsers">
+      <EntityTypeMapping TypeName="MyPOSModel.LoginUser">
+        <MappingFragment StoreEntitySet="LoginUsers">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="MyPOSModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+          <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductSizes">
+      <EntityTypeMapping TypeName="MyPOSModel.ProductSize">
+        <MappingFragment StoreEntitySet="ProductSizes">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrderDetails">
+      <EntityTypeMapping TypeName="MyPOSModel.SalesOrderDetail">
+        <MappingFragment StoreEntitySet="SalesOrderDetails">
+          <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="StockID" ColumnName="StockID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrders">
+      <EntityTypeMapping TypeName="MyPOSModel.SalesOrder">
+        <MappingFragment StoreEntitySet="SalesOrders">
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Net" ColumnName="Net" />
+          <ScalarProperty Name="Cash" ColumnName="Cash" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stocks">
+      <EntityTypeMapping TypeName="MyPOSModel.Stock">
+        <MappingFragment StoreEntitySet="Stock">
+          <ScalarProperty Name="StockID" ColumnName="StockID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+          <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ups_Products_LoadAllProductsByProductName" FunctionName="MyPOSModel.Store.ups_Products_LoadAllProductsByProductName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyPOSModel.ups_Products_LoadAllProductsByProductName_Result">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="Purchase_Price" ColumnName="Purchase Price" />
+          <ScalarProperty Name="Sales_Price" ColumnName="Sales Price" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ups_Products_LoadAllProductsForDataGridView" FunctionName="MyPOSModel.Store.ups_Products_LoadAllProductsForDataGridView">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyPOSModel.ups_Products_LoadAllProductsForDataGridView_Result">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="Purchase_Price" ColumnName="Purchase Price" />
+          <ScalarProperty Name="Sales_Price" ColumnName="Sales Price" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_ListTypesData_LoadDataIntoComboBox" FunctionName="MyPOSModel.Store.usp_ListTypesData_LoadDataIntoComboBox">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyPOSModel.usp_ListTypesData_LoadDataIntoComboBox_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Login_verifyLoginDetails" FunctionName="MyPOSModel.Store.usp_Login_verifyLoginDetails" />
+    <FunctionImportMapping FunctionImportName="usp_Products_DeleteProductAndSizes" FunctionName="MyPOSModel.Store.usp_Products_DeleteProductAndSizes" />
+    <FunctionImportMapping FunctionImportName="usp_Products_InsertCustomerInfo" FunctionName="MyPOSModel.Store.usp_Products_InsertCustomerInfo" />
+    <FunctionImportMapping FunctionImportName="usp_Products_InsertNewProductt" FunctionName="MyPOSModel.Store.usp_Products_InsertNewProductt" />
+    <FunctionImportMapping FunctionImportName="usp_Products_InsertProductSizes" FunctionName="MyPOSModel.Store.usp_Products_InsertProductSizes" />
+    <FunctionImportMapping FunctionImportName="usp_Sizes_LoadAllSizes" FunctionName="MyPOSModel.Store.usp_Sizes_LoadAllSizes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyPOSModel.usp_Sizes_LoadAllSizes_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Select" ColumnName="Select" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

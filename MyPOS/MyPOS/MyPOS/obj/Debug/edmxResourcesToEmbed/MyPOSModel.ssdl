@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyPOSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CustomerInfo">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="15" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="ListTypes">
+    <Key>
+      <PropertyRef Name="ListTypeID" />
+    </Key>
+    <Property Name="ListTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ListTypesData">
+    <Key>
+      <PropertyRef Name="ListDataID" />
+    </Key>
+    <Property Name="ListDataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ListTypeID" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="Visible" Type="bit" />
+  </EntityType>
+  <EntityType Name="LoginUsers">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="SupplierID" Type="int" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="ProductSizes">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="SizeID" />
+    </Key>
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="SizeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesOrderDetails">
+    <Key>
+      <PropertyRef Name="DetailID" />
+    </Key>
+    <Property Name="DetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="int" />
+    <Property Name="StockID" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="SalesOrders">
+    <Key>
+      <PropertyRef Name="InvoiceNumber" />
+    </Key>
+    <Property Name="InvoiceNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="GrandTotal" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Net" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Cash" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="StockID" />
+    </Key>
+    <Property Name="StockID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="SizeID" Type="int" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <Function Name="ups_Products_LoadAllProductsByProductName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ups_Products_LoadAllProductsForDataGridView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_ListTypesData_LoadDataIntoComboBox" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ListTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Login_verifyLoginDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Products_DeleteProductAndSizes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Products_InsertCustomerInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Products_InsertNewProductt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="CategoryID" Type="int" Mode="In" />
+    <Parameter Name="SupplierID" Type="int" Mode="In" />
+    <Parameter Name="PurchasePrice" Type="decimal" Mode="In" />
+    <Parameter Name="SalesPrice" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="usp_Products_InsertProductSizes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="SizeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Sizes_LoadAllSizes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ListTypeID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="MyPOSModelStoreContainer">
+    <EntitySet Name="CustomerInfo" EntityType="Self.CustomerInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListTypes" EntityType="Self.ListTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListTypesData" EntityType="Self.ListTypesData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoginUsers" EntityType="Self.LoginUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductSizes" EntityType="Self.ProductSizes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesOrderDetails" EntityType="Self.SalesOrderDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesOrders" EntityType="Self.SalesOrders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

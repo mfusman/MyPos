@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{521860C7-7262-42F8-B310-F124E3DFA2FD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MyPOS</RootNamespace>
+    <AssemblyName>MyPOS</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomerInfo.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="General\ApplicationSettings.cs" />
+    <Compile Include="ListType.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListTypesData.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoginUser.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MetroFramework\Form.cs" />
+    <Compile Include="MyPOSModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyPOSModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyPOSModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyPOSModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyPOSModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductSize.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SalesOrder.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesOrderDetail.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\CustomersFolder\CustomerRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\CustomersFolder\CustomerRecordForm.Designer.cs">
+      <DependentUpon>CustomerRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\CustomersFolder\NewCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\CustomersFolder\NewCustomerForm.Designer.cs">
+      <DependentUpon>NewCustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\DashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\DashboardForm.Designer.cs">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\ProductsFolder\DefineProductScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\ProductsFolder\DefineProductScreen.Designer.cs">
+      <DependentUpon>DefineProductScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\ProductsFolder\ProductsRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\ProductsFolder\ProductsRecordForm.Designer.cs">
+      <DependentUpon>ProductsRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stock.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ups_Products_LoadAllProductsByProductName_Result.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ups_Products_LoadAllProductsForDataGridView_Result.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_ListTypesData_LoadDataIntoComboBox_Result.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Sizes_LoadAllSizes_Result.cs">
+      <DependentUpon>MyPOSModel.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\CustomersFolder\CustomerRecordForm.resx">
+      <DependentUpon>CustomerRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\CustomersFolder\NewCustomerForm.resx">
+      <DependentUpon>NewCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\DashboardForm.resx">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\ProductsFolder\DefineProductScreen.resx">
+      <DependentUpon>DefineProductScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\ProductsFolder\ProductsRecordForm.resx">
+      <DependentUpon>ProductsRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="MyPOSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MyPOSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MyPOSModel.edmx.diagram">
+      <DependentUpon>MyPOSModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogIN.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\factory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Define products.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\category.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\consumer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\saelsorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output-onlinepngtools %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output-onlinepngtools %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\order.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MyPOSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MyPOSModel.Context.cs</LastGenOutput>
+      <DependentUpon>MyPOSModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="MyPOSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyPOSModel.edmx</DependentUpon>
+      <LastGenOutput>MyPOSModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
